@@ -1,0 +1,17 @@
+services:
+    npm:
+        image: node:18-alpine
+        volumes:
+            - .app/app:delegated
+            - .app/root/.npm:delegated
+        ports:
+            - "5500:5173"
+        command:
+            - /bin/sh
+            - -c
+            - |
+                npm create vite@8.0.0 . -- --template svelte
+                npm install
+        working_dir: /app
+        restart: no
+        

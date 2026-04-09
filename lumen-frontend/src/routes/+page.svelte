@@ -1,10 +1,33 @@
 
 <script lang="ts">
-import type { PageData } from './$types';
-import LanguageResource from '$lib/LanguageResource.svelte';
-const { data } = $props<{ data: PageData }>();
+import type { LearningResource } from '$lib/../app';
+import LearningResourceEditor from '$lib/LearningResource.svelte';
+import LearningResourceList from '$lib/LearningResourceList.svelte';
+
+interface PageData {
+    resources: LearningResource[];
+}
+
+let { data = { resources: [] } }: { data: PageData } = $props();
+
+let editingResource: LearningResource | null = $state(null);
+
+const handleEdit = (resource: LearningResource) => {
+    editingResource = resource;
+};
+
+const handleEditComplete = () => {
+    editingResource = null;
+};
 </script>
 
-<LanguageResource />
+<div class="container">
+    <LearningResourceList resources={data.resources} onEdit={handleEdit} />
+    <LearningResourceEditor editingResource={editingResource} onEditComplete={handleEditComplete} />
+</div>
 
-<h1>{data.message}</h1>
+<style>
+    .container {
+        padding: 1rem;
+    }
+</style>
