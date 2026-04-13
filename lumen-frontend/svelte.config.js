@@ -1,8 +1,18 @@
-import adapter from '@sveltejs/adapter-auto';
+import adapter from '@sveltejs/adapter-node';
 import { relative, sep } from 'node:path';
+import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
+
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
+	preprocess: vitePreprocess(),
+	kit: {
+		adapter: adapter({
+			out: 'build',
+			host: '0.0.0.0',
+			port: 3000,
+		}),
+	},
 	compilerOptions: {
 		// defaults to rune mode for the project, except for `node_modules`. Can be removed in svelte 6.
 		runes: ({ filename }) => {
