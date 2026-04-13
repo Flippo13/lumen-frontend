@@ -21,6 +21,7 @@
 		"vite": "^7.3.1"
 	},
 	"dependencies": {
+		"@sveltejs/adapter-node": "^5.5.4",
 		"svelte-use-form": "^3.0.1"
 	}
 }
