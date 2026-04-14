@@ -11,7 +11,7 @@
   let title = $state('');
   let description = $state('');
   let editingId: number | null = $state(null);
-
+  // een comment 
   // Watch for changes to editingResource prop
   $effect(() => {
     if (editingResource) {
